@@ -8,8 +8,8 @@
 
 <?php
 	//retrieve the memberID from the URL	
-	$memberID = $_GET['memberID'];
-
+	
+    $memberID = $_GET['memberID'];
 	//call the delete_member() function
 	$result = delete_member($memberID);
 	//var_dump($result);

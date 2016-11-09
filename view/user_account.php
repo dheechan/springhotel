@@ -18,7 +18,26 @@
     
 
 ?>
+<script>
+        // Bookings show/hide
 
+        $(document).ready(function(){
+            $("#myBookings").click(function(){
+//                $("#hiddenForm").toggle();
+                hiddenForm.style.display="block";
+                profile_hidden.style.display="none";
+            });
+        });
+    // Profile show/hide
+
+        $(document).ready(function(){
+            $("#myProfile").click(function(){
+//                $("#profile_hidden").toggle();
+                profile_hidden.style.display="block";
+                hiddenForm.style.display="none";
+            });
+        });
+</script>          
 <!--
 <p style="display:none;" onClick="dontpopUp()" id="exit">x</p>
         <div style="display:none;" onClick="popUp()" id="open">
@@ -29,14 +48,17 @@
   
         <div class="container">
                         
-            
+     
          <div class="spacediv">Welcome</div> 
+      
             <ul>
                 <li><a href="#" id="myProfile">View Profile</a></li>
                 <li><a href="#" id="myBookings">My Bookings</a></li>
             </ul> 
          <a href = "../controller/logout_process.php">Logout</a>   
-            <div class="spacediv"></div>   
+            <div class="break"></div>
+      
+
             
         <form id="hiddenForm" method="post">
             <div class="spacediv">My Bookings</div>  
@@ -44,8 +66,6 @@
             <thead>
                 <tr>
                     <th> Booking Date </th>
-                    <th> First Name </th>
-                    <th> Last Name </th>
                     <th> Checkin Date </th>
                     <th> Checkout Date </th>
                     <th> Total Rooms </th>
@@ -57,20 +77,16 @@
             <tbody>
             
             
-        <?php
+    <?php
         
-        $result = get_bookings();
+           $result = get_bookings();
 //        var_dump($result);
 //    exit;
-		
-	   ?>            
-                
-         <?php foreach($result as $row):?>
+	       foreach($result as $row):
+    ?>
          <tr class="record">
         
         <td><?php echo $row['date']; ?></td>     
-        <td><?php echo $row['firstname']; ?></td>
-		<td><?php echo $row['lastname']; ?></td>
         <td><?php echo $row['checkindate']; ?></td>
 		<td><?php echo $row['checkoutdate']; ?></td>
         <td><?php echo $row['totalrooms']; ?></td>
@@ -86,7 +102,7 @@
               
         </form>
         
- 
+
 
        <div id="profile_hidden">
 
@@ -99,18 +115,20 @@
 	   ?>   
         <?php foreach($result_mem as $row):?>
     
-        <div>Name:<?php echo $row['memberfirstname']; ?></div>
-        <div>Last Name:<?php echo $row['memberlastname']; ?></div>
-        <div>Street Address:<?php echo $row['memberstreet']; ?></div>
-        <div>Street Address:<?php echo $row['membersuburb']; ?></div>
-        <div>Street Address:<?php echo $row['membercountry']; ?></div>    
-        <div>Street Address:<?php echo $row['memberpostcode']; ?></div>    
+        <div><h3>Name: <?php echo $row['memberfirstname']; ?></h3></div>
+        <div><h3>Last Name: <?php echo $row['memberlastname']; ?></h3></div>
+        <div><h3>Street Address: <?php echo $row['memberstreet']; ?></h3></div>
+           <div><h3>Suburb: <?php echo $row['membersuburb']; ?></h3></div>
+           <div><h3>Country: <?php echo $row['membercountry']; ?></h3></div>    
+           <div><h3>Postcode: <?php echo $row['memberpostcode']; ?></h3></div>    
     
 
 	<?php endforeach; ?>
     </div>
 
     </div> 
+
+<div class="break"></div>
 <?php
     
     require('footer.php');

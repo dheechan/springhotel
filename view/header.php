@@ -7,7 +7,8 @@
 	<title>Spring Hotel</title>
     <!-- link to CSS -->
     <link rel="stylesheet" href="css/main.css">
-    <script type="text/javascript" src="../view/ajax/jquery-1.2.6.min.js"></script>
+<!--    <script type="text/javascript" src="../view/ajax/jquery-1.2.6.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/javascript.js" type="text/javascript"></script>
    
     <link rel="stylesheet" href="../view/jquery-ui-1.12.1/jquery-ui.theme.css">
@@ -15,25 +16,7 @@
     
     <script src="../view/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
     <script src="../view/jquery-ui-1.12.1/jquery-ui.js"></script>
-      <script>
-
-    
-          $( function() {
-            $( "#datepicker_in" ).datepicker({ minDate: -0, maxDate: "+1Y +10D", dateFormat: 'yy-mm-dd' });
-        
-          } );
-          
-          $( function() {
-            $( "#datepicker_out" ).datepicker({ minDate: +1, maxDate: "+1Y +10D", dateFormat: 'yy-mm-dd' });
-          } );
-          
-           
-          //Book Now Button
-          function bookNow() {
-                document.getElementById("panel").style.display = "block";
-            }
-             
-      </script>
+      
 
 </head>
 <body>
@@ -49,8 +32,7 @@
 				<div class="right">
 					<ul>
 						<li class="active"><a href="../view/home.php">Home</a></li>
-						<li><a href="#">Gallery</a></li>
-                        <li><a href="#">Contact us</a></li>
+<!--						<li><a href="#">Gallery</a></li>-->
                         <?php
                        
                         if (isset($_SESSION['user'])) {
@@ -63,19 +45,17 @@
                             echo '<li><a href="../view/loginreg.php">Login</a></li>';
                         }
                          if (isset($_SESSION['admin'])) {
+                             header('location:../view/memdata.php');
                             $user_type = $_SESSION['admin'];
                             echo '<li><a href="../view/memdata.php">My Account</a></li>';
                             
                         }
-                         if (isset($_SESSION['reservation_cart'])) {
+                         if (isset($_SESSION['reservation_cart']) AND !empty($_SESSION['reservation_cart'])) {
                             echo '<li><a href="../view/reservation.php">My Cart</a></li>';
                             
                         } 
-                             
-                        
-        
                         ?>
-                        
+<!--                        <li><a href="../view/contactus.php">Contact us</a></li>-->
 				    </ul>
 				</div> <!-- end right -->
 			</div> <!-- end container -->

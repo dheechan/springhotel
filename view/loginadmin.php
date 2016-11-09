@@ -28,9 +28,6 @@
 
     <div class="container">  
         	<h1 class="centertext">Welcome</h1>
-        <p class="centertext">We're happy to see you return! Please login to continue.</p>
-        <p class="centertext">*Registration is for members only*</p>
-         <p class="centertext">*Only admin can login at this moment*</p>
         <p class="centertext">*Username: admin | Password: password*</p>
         
 	
@@ -43,11 +40,11 @@
        <form action="../controller/authentication.php" onsubmit="return(A());" method="post" >
             
             Username<br>
-            <input type="text" size="30" name="username_two" /required > <br/>
+            <input type="text" size="25" name="username_two" /required > <br/>
             Password<br>
             <input type="password" name="password_two" size="30" maxlength="10" /required> <br/>
             <input type="submit" name="login" value="Login"> 
-            <a id="opendiv" onclick="A()"><h4>Create New Account</h4></a>  
+ 
         </form>             
         </div>
      </div>   

@@ -76,7 +76,7 @@
 	if($result)
 	{
 		//if member is successfully added
-		$_SESSION['success']= 'Thank you for creating an account. Please login. *Only Admin can login at this moment';
+		$_SESSION['success']= 'Thank you for creating an account. Please login.';
 		//redirect to loginreg.php
 		header('location:../view/loginreg.php');
 	}

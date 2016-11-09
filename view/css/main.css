@@ -153,12 +153,12 @@ footer{
 	color:#bdbdbd;
 }
 
-#copyright{
+.copyright{
 	background-color:midnightblue;
 	overflow:hidden;
 }
 
-.copyright{
+.copyrightname{
 	text-align:right;
 	font-size:12px;
 	padding:10px 0;
@@ -233,7 +233,7 @@ img{
 	overflow:hidden;
 }
 
-#datebar{
+.datebar{
     background-color: aliceblue;
 }
 
@@ -243,6 +243,12 @@ img{
    
 }
 .leftform{
+	float:left;
+	width:50%;
+    text-align: left;
+  
+}
+.leftformreserve{
 	float:left;
 	width:50%;
     text-align: left;
@@ -287,8 +293,27 @@ img{
    
 
 }
+.right_roomreserve{
+    float:right;
+    width:25%;
+   
+
+}
+
+.right_roomcart{
+    float:right;
+    width:25%;
+   
+
+}
 
 .left_info{
+    float:left;
+    width:25%;
+
+	
+}
+.left_infocart{
     float:left;
     width:25%;
 
@@ -317,7 +342,7 @@ input[type="text"]{
 */
 
 input[type="text"]{
-    border-radius: 1em;
+    border-radius: 0.3em;
     width: 15em;
 }
 .leftform > input[type="text"] {
@@ -344,19 +369,19 @@ input[type="text"]{
 }
 
 input[type="password"]{
-    border-radius: 1em;
+    border-radius: 0.3em;
     width: 15em;
 }
 input[type="email"]{
-    border-radius: 1em;
+    border-radius: 0.3em;
     width: 15em;
 }
 input[type="tel"]{
-    border-radius: 1em;
+    border-radius: 0.3em;
     width: 15em;
 }
 select{
-    border-radius: 1em;
+    border-radius: 0.3em;
 }
 input[type="submit"]{
     background-color: black;
@@ -486,10 +511,10 @@ input[type=email]:focus, textarea:focus {
 }
 #box{
     display: none;
-    margin-top:18%;
-    margin-left:43%;
-    width:15%;
-    height:420px;
+    margin-top:13%;
+    margin-left:41%;
+    width:18%;
+    height:630px;
     text-align: right;
     font-weight: bold;
     background-color:steelblue;
@@ -498,6 +523,31 @@ input[type=email]:focus, textarea:focus {
     z-index:2;
     top:-150px;
 }
+#tinttwo{
+    width: 100%;
+    min-height:980px;
+    position: absolute;
+    background-color:black;
+    opacity: 0.8;
+    display:none;
+    top: 0px;
+    
+}
+#boxtwo{
+    display: none;
+    margin-top:23.5%;
+    margin-left:59%;
+    width:18%;
+    height:300px;
+    text-align: right;
+    font-weight: bold;
+    background-color:white;
+    border-radius: 1em;
+    position: absolute;
+    z-index:2;
+    top:-150px;
+}
+
 #exit{
     color:black;
     margin-right:0.5em;
@@ -527,9 +577,15 @@ border: 1px solid #AC3962;
 color: #333333; 
 }
 
-#status{
-    font-size:12px;
-    height: 5px;
+#emailstats{
+    font-size:8px;
+    height: 3px;
+   
+}
+
+#userstats{
+    font-size:8px;
+    height: 3px;
    
 }
 
@@ -572,10 +628,23 @@ table{
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+.smbreak{
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+.xsbreak{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
 .spacediv {
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 1em;
+}
+.spacelarge{
+    margin-top: 3em;
+    margin-bottom: 3em;
 }
 .spacediv_room {
     margin-top: 0.3em;
@@ -632,4 +701,196 @@ table{
 #profile_hidden{
     display:none;
     
+}
+#form_hidden{
+    display:none;
+    
+}
+#data_hidden{
+    display:none;
+    
+}
+#memberdata_hidden{
+    display:none;
+    
+}
+
+.jerror{
+/*	width:85%;*/
+	color:white;
+/*	padding:5px;*/
+/*	margin:20px 0 20px 0;*/
+    background-color: indianred;
+    margin-bottom: 8px;
+	border-radius:3px;
+	text-align:center;
+    font-size: 10px;
+}
+
+.jerror{
+    display:none;
+}
+
+#form2{
+    margin-top:2px;
+}
+
+#closediv{
+    display:block;
+}
+#opendivider{
+    display:block;
+}
+
+.movestep{
+    margin-left: 0.3em;
+/*    border:1px solid;*/
+    width: 113px;
+    background-color: deepskyblue;
+    border-radius: 0.3em;
+}
+
+.movestep > h3 > a{
+    margin-left: 1.4em;
+    color:white;
+  
+}
+.mid_div{
+   text-align: left;
+    margin-left: 2em;
+    
+}
+.textroom{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.float_date{
+    float:right;
+    margin-left: 1em;
+}
+.hide_delete{
+    display:none;
+}
+
+/* Mobile Browser *//* Mobile Browser *//* Mobile Browser *//* Mobile Browser */
+/* Mobile Browser *//* Mobile Browser *//* Mobile Browser *//* Mobile Browser */
+
+@media only screen and (max-width:400px) 
+{
+   
+.banner{
+	display: none;
+}
+    
+.left_bar{
+    display: none;
+   	
+}
+    
+.right_bar{
+    
+	float:none;
+	width:400px;
+    height: 50px;
+    background-color: steelblue;
+}
+    .center_bar{
+	float:none;
+	width:400px;
+    height: 60px;
+    background-color: aliceblue;
+
+}
+    .float_date{
+    float:none;
+    margin-top: 0.5em;
+    margin-left: -0.4em;
+}
+.centerdate{
+    text-align: left;
+    margin-top: 27px;
+    color: black;
+    font-weight: bold;
+}
+.right_bar > p{
+    text-align: center;
+    margin-top: 22px;
+   
+}
+    
+.right_bar > p > input[type="submit"]{
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration:none;
+/*    color: white;*/
+    border: 0;
+    background-color: steelblue;
+}
+.main > .container{
+    width:300px;
+    text-align: center;
+        
+}
+.logo{
+	padding:10px 0 10px 10px;
+}    
+.right{
+	float:none;
+	width:260px;
+/*    margin-left: 1em;*/
+}
+.right > ul > li{
+	text-align: left;
+}
+.copyright > .container > .left > .logo{
+    text-align: center;
+	width:350px;
+    
+}
+
+.copyrightname{
+	text-align: center;
+	width:360px;
+	font-size:12px;
+	padding:10px 0;
+}    
+.room_container{
+	width:300px;
+    margin-left:2em;
+	
+}  
+.left_room{    
+	float:none;
+
+      
+}
+.right_roomcart{
+    clear: both;
+    float:left;
+    margin-top: 2em;
+    margin-left: 2em;
+/*    width:400px;*/
+   
+
+}    
+    
+.left_infocart{
+    float:left;
+    margin-left: 2em;
+/*    width:25%;*/
+
+	
+} 
+.leftformreserve{
+	display:none;
+  
+}
+.right_roomreserve{
+    display:none;
+   
+
+}
+    .hide_delete{
+    display:block;
 }

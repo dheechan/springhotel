@@ -1,12 +1,12 @@
 
 	<footer>
-			<section id="copyright">
+			<section class="copyright">
 				<div class="container">
 					<div class="left">
 						<p class="logo"><img src="images/logoFooter.png" alt="logo"></p>
 					</div> <!-- end left -->
 					<div class="right">
-						<p class="copyright">Spring Hotel &copy; 2016</p>
+						<p class="copyrightname">Spring Hotel &copy; 2016</p>
 					</div> <!-- end right -->
 				</div> <!-- end container -->
 			</section> <!-- end copyright -->
@@ -22,7 +22,8 @@
 if (isset($_SESSION['user'])) {
     $user_type = $_SESSION['user'];
     echo ' USER TYPE: ' . $user_type; 
-} else {
+} 
+if (!isset($_SESSION['user'])){
     $user_type = 'Anonymous';
     echo ' USER TYPE: ' . $user_type; 
 

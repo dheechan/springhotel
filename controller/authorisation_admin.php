@@ -5,6 +5,6 @@
 		header('location:loginadmin.php');
 	}
 
-   
+  
    
 ?>

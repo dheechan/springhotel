@@ -87,7 +87,7 @@
 	function delete_member($memberID)
 	{
        
-        
+        $memberID = $_GET['memberID'];
 		global $conn;
 		$sql = "DELETE FROM member WHERE memberID = :memberID";
 		$statement = $conn->prepare($sql);
@@ -97,6 +97,49 @@
 		return $result;		
 	}
 
+     function get_bookingdata()
+	{
+        
+		global $conn;
+        
+        
+		//query the database to select all data from the membertable
+		$sql = "SELECT * FROM booking as A JOIN booking_items as B ON A.bookingID=B.bookingID ORDER BY date DESC";		
+		//use a prepared statement to enhance security
+		$statement = $conn->query($sql);
+//        echo $sql;
+//        die();
+//        $statement->bindValue(':memberID', $memberID);
+//		$statement->execute();
+		$result = $statement->fetchAll();
+  		$statement->closeCursor();
+		return $result;
+        
+      
+	}
+
+//    function get_datainfo()
+//	{
+//        
+//		global $conn;
+//        
+//        
+//		//query the database to select all data from the membertable
+//		$sql = "SELECT * FROM booking as A JOIN booking_items as B ON A.bookingID=B.bookingID WHERE B.bookingID = :bookingID ORDER BY date DESC";		
+//		//use a prepared statement to enhance security
+//		$statement = $conn->query($sql);
+////        echo $sql;
+////        die();
+//        $statement->bindValue(':bookingID', $_GET['bookingID']);
+//		$statement->execute();
+//		$result = $statement->fetchAll();
+//  		$statement->closeCursor();
+//		return $result;
+//        
+//      
+//	}
+    
+    
 
 ?>
 

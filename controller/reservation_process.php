@@ -18,20 +18,43 @@
 
     
   
+    if(isset($_SESSION['user'])){
+            
+            $result = add_booking($firstName, $lastName, $phone, $email);
+        //    $add_items =  add_bookingitems();
+//        	var_dump($result);
+//            exit;
+            //create user messages
+                if($result)
+                {  
 
-	//call the add_user() function
-	$result = add_booking($firstName, $lastName, $phone, $email);
-	var_dump($result);
-    exit;
-	//create user messages
-	if($result)
-	{
-		//redirect to loginreg.php
-		header('location:../view/reservation.php');
-	}
-    else
-	{
+                    unset($_SESSION['reservation_cart']);
+                    header('location:../view/successbooking.php');
 
-		header('location:../view/booking.php');
-	}
+                }
+                else
+                {
+
+                    header('location:../view/booking.php');
+                }
+        } 
+
+
+        if(!isset($_SESSION['user'])){
+        $result_an = add_booking_anonymous($firstName, $lastName, $phone, $email);
+        if($result_an)
+            {  
+
+                unset($_SESSION['reservation_cart']);
+                header('location:../view/successbooking.php');
+
+            }
+            else
+            {
+
+                header('location:../view/booking.php');
+            }
+    }
+
+    
 ?>

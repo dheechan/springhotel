@@ -2,7 +2,7 @@
 	//start session management
 	session_start();
 	//include authorisation management
-	require('../controller/authorisation.php');
+	require('../controller/authorisation_admin.php');
 	//connect to the database
 	require('../model/database.php');
 	//retrieve the functions
@@ -14,7 +14,7 @@
 	
 	//retrieve the header
 	require('header_two.php');
-
+    
 ?>
 
 <div class="container">  
@@ -37,8 +37,9 @@
            
         
         <input type="submit" value="Save" />
-            
-       
+         <div class="smbreak"></div>   
+        <h3> <a href = "../view/memdata.php">&#8592; Go Back</a></h3>  
             
         </form>
+       
     </div>

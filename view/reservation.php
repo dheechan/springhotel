@@ -14,12 +14,15 @@
              $check_out = $_SESSION['check_out'];
         }
     }
+
+    
+    
 //	//include authorisation management
 //	require('../controller/authorisation.php');
 	//connect to the database
 	require('../model/database.php');
 //	//retrieve the functions
-//	require('../model/functions_rooms.php');
+	require('../model/functions_users.php');
 //	require('../model/functions_messages.php');
 
 	//provide the value of the $title variable for this page
@@ -32,32 +35,89 @@
     
 
 ?>
- <div class="container">
+
+<div class="container">
       <div class="spacediv"></div>
- <div class="left_info">
+ <div class="left_infocart">
     
       <h2>Guest Details</h2>
      <div class="break"></div>
+<?php
+if(isset($_SESSION['user'])){
+echo "<script type='text/javascript'> 
+      document.getElementById('closediv').style.display ='block';
+      document.getElementById('opendivider').style.display = 'none';
+</script>";
+
+   $data = get_member();
+     foreach($data as $row){   
+?> 
+     
+<div id="closediv">
+
      
 <form class="leftform" action="../controller/reservation_process.php" method="post" target="_self">
-            
-            <input type="text" name="firstName" id="firstName" required placeholder="  First name*" /><br />
-            <input type="text" name="lastName" id="lastName"  required placeholder="  Last name*" /><br />
-            <input type="tel" name="phone" id="phone" required placeholder="  Phone number*" pattern=".{10,}" title="Include your area code. Numbers only." /><br />
-            <input type="email" name="email" id="email" placeholder="  Email address*" required /><br />               <div class="break"></div> 
+           
+            <input type="text" name="firstName" id="firstName" required placeholder="  First name*" value="<?php echo $row['memberfirstname'];?>" /><br />
+            <input type="text" name="lastName" id="lastName"  required placeholder="  Last name*" value="<?php echo $row['memberlastname'];?>" /><br />
+            <input type="tel" name="phone" id="phone" required placeholder="  Phone number*" pattern=".{10,}" title="Include your area code. Numbers only." value="<?php echo $row['membercontact'];?>"/><br />
+            <input type="email" name="email" id="email" placeholder="  Email address*" value="<?php echo $row['memberemail'];?>" required /><br />               
+            <div class="break"></div> 
             Payment Method:*
             <select>
             <option value="paypal">Paypal</option>
             </select><br/>
     
-            <input id="roomtype" name="hidden_roomtype" type="hidden" value="<?php echo $values['roomtype']; ?>">          
-            <input id="roomprice" name="hidden_roomprice" type="hidden" value="<?php echo $row['roomprice']; ?>">
-            <input type="submit" name= "paynow" value="Pay Now" id="paynow"> 
-                    
+
+            <input type="submit" name= "paynow" value="PAY NOW" id="paynow"> 
+                <div class="movestep"><h3> <a href = "../view/bookroom.php">Go Back</a></h3> </div>        
         </form>
+
+    </div>
+            
+<?php
+     }    
+ }
+     
+if(!isset($_SESSION['user'])){
+echo "<script type='text/javascript'> 
+      document.getElementById('closediv').style.display ='none';
+      document.getElementById('opendivider').style.display = 'block';
+</script>";
+
+    
+     ?>
+
+     <div id="opendivider">
+     
+<form class="leftform" action="../controller/reservation_process.php" method="post" target="_self">
+           
+            <input type="text" name="firstName" id="firstName" required placeholder="  First name*"  /><br />
+            <input type="text" name="lastName" id="lastName"  required placeholder="  Last name*"  /><br />
+            <input type="tel" name="phone" id="phone" required placeholder="  Phone number*" pattern=".{10,}" title="Include your area code. Numbers only." /><br />
+            <input type="email" name="email" id="email" placeholder="  Email address*"  required /><br />               
+            <div class="break"></div> 
+            Payment Method:*
+            <select>
+            <option value="paypal">Paypal</option>
+            </select><br/>
+    
+
+            <input type="submit" name= "paynow" value="PAY NOW" id="paynow"> 
+<!--            <div class="smbreak"></div>-->
+               <div class="movestep"><h3> <a href = "../view/bookroom.php">Go Back</a></h3> </div>      
+        </form>
+ 
+     
+     </div>
+
+ <?php
+     }
+    ?>
+     
      </div>
         <div class="spacediv"></div>
-      <div class="right_room">
+      <div class="right_roomcart">
         <h2>SUMMARY</h2>
         <div class="break"></div>
   
@@ -73,7 +133,7 @@
        foreach($_SESSION["reservation_cart"] as $keys => $values)
 		{
 			?>
-
+            <h4 class="hide_delete"><a href="bookroom.php?action=delete&roomID=<?php echo $values["roomID"]; ?>"> <span>REMOVE X</span></a></h4>
             <h4>Room Name: <?php echo $values["roomtype"]; ?></h4>
             <h4>Room Quantity: <?php echo $values["quantity"] ?></h4>
             <h4>Price per night: $<?php echo $values["roomprice"]; ?></h4>

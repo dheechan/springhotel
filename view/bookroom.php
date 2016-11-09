@@ -14,7 +14,8 @@ session_start();
              $check_out = $_SESSION['check_out'];
         }
     }
-    
+ 
+
 //	//include authorisation management
 //	require('../controller/authorisation.php');
 	//connect to the database
@@ -32,6 +33,8 @@ session_start();
     require('checkdate.php');
 
 ?>
+
+
     
     <div class="container">
         <div class="left_room2">
@@ -56,20 +59,20 @@ session_start();
     foreach ($get_roomtype as $bookings):
            // echo $bookings['roomavailquantity']-$check_avail;
 
-    if(($bookings['roomavailquantity'] - $check_avail) != 0) { 
+    if(($bookings['roomavailquantity'] - $check_avail) >=0 && ($bookings['roomavailquantity'] - $check_avail) !=0) { 
       
 	?>
        
         <div class="spacediv"></div>
        
-        <div class="left_room"><?php echo ('<img src="data:image/jpeg;base64,' .base64_encode ( $row['roomimage'] ).'"/>'); ?></div> 
+        <div class="left_room"><?php echo "<img src='images/" . ($row['roomimage']) . "'" . ' width=300 height=200 alt="product photo"'  . "/>"; ?></div> 
         <h2><?php echo $row['roomtype']; ?></h2>
         <div class="spacediv_room"></div>    
         <h5><?php echo $row['roomdescription']; ?></h5>
 <!--        <div class="spacediv_room"></div>     -->
         <h3>Room Capacity: Max <?php echo $row['roomcapacity']; ?> people </h3>
-        <h3>Rate: $<?php echo $row['roomprice']; ?> </h3>
-         <form  class="leftform_book" action="bookroom.php?action=add&roomID=<?php echo $row['roomID']; ?>" class="book_form" name="book_rooms" method="POST"> 
+        <h3>Rate: $<?php echo $row['roomprice']; ?>/NIGHT </h3>
+         <form  class="leftform_book" action="bookroom.php?action=add&roomID=<?php echo $row['roomID']; ?>#right_cart" class="book_form" name="book_rooms" method="POST"> 
              
      <?php if(isset($_POST['booknow']))
         {
@@ -87,7 +90,7 @@ session_start();
                     'quantity' => $_POST["quantity"] 
                     );
                     $_SESSION["reservation_cart"][$count] = $item_array;
-//                    echo '<script>window.location="bookroom.php"</script>';
+                    echo '<script>window.location="bookroom.php"</script>';
                 }
 //                else{
 //                    echo '<script>alert("Item Already Added")</script>';
@@ -114,7 +117,7 @@ session_start();
                         
                         unset($_SESSION["reservation_cart"][$keys]);
                          $_SESSION["reservation_cart"] = array_values($_SESSION["reservation_cart"]);
-//                        echo '<script>window.location="bookroom.php"</script>';
+                        echo '<script>window.location="bookroom.php"</script>';
 
                     }
                 }
@@ -125,14 +128,26 @@ session_start();
         <input id="roomtype" name="hidden_roomtype" type="hidden" value="<?php echo $row['roomtype']; ?>">            
         <input id="roomprice" name="hidden_roomprice" type="hidden" value="<?php echo $row['roomprice']; ?>">
            
-        Room Quantity:
-        <input id="roomtype" name="quantity" type="text" maxlength="1" size="4" value="1">     
+ Room Quantity:
+<!--        <input id="roomtype" name="quantity" type="text" maxlength="2" size="4" value="1">-->
              
+             <select name='quantity'>
+                   <!-- <option></option>-->
+                <?php
+                    for ($i=1; $i<=$bookings['roomavailquantity'] - $check_avail; $i++)
+                    {
+                        ?>  
+                            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                        <?php
+                    }
+                ?>
+                </select> 
          <input type="submit" name= "booknow" value="Book Now" id="booknow" >
            
 <!--           <div class="break"></div>  -->
 <!--        <a class="bookfont">BOOK THIS ROOM</a>    -->
         </form>
+          
         
 <!--        <div class="spacediv"></div>-->
             
@@ -143,14 +158,28 @@ session_start();
         }  endforeach;   
            endforeach;      
  
-            ?>  
+            ?> 
+<!--
+        <div class="spacelarge"></div>    
+         <div class="reservehide">
+         <form class="reservebutton" action="../view/reservation.php" method="POST">
+    
+             
+         <input type="submit" name= "reservenow" value="RESERVATION CART" id="reservenow">      
+        <a class="bookfont">BOOK THIS ROOM</a>    
+        </form>     
+        </div> 
+-->
+            
             </div>
             
         </div>
+     
+        
     <div class="spacediv"></div>
 <!--       <div id="panel">-->
-    <?php if(isset($_SESSION['reservation_cart'])): ?>
-        <div class="right_room">
+    <?php if(isset($_SESSION['reservation_cart']) && !empty($_SESSION['reservation_cart'])): ?>
+        <div class="right_roomreserve" id="right_cart">
         <h2>My Reservation Cart</h2>
         
  
@@ -159,14 +188,14 @@ session_start();
     <br/>
         
          
-    <div class="leftform">
+    <div class="leftformreserve">
 
      <?php
         $total = 0;
        foreach($_SESSION["reservation_cart"] as $keys => $values)
 		{
 			?>
-             <h4><a href="bookroom.php?action=delete&roomID=<?php echo $values["roomID"]; ?>"> <span>REMOVE X</span></a></h4>
+             <h4><a href="bookroom.php?action=delete&roomID=<?php echo $values["roomID"];  ?>"> <span class="itemremove">REMOVE X</span></a></h4>
             <h4>Room Name: <?php echo $values["roomtype"]; ?></h4>
             <h4>Room Quantity: <?php echo $values["quantity"] ?></h4>
             <h4>Price per night: $<?php echo $values["roomprice"]; ?></h4>

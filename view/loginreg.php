@@ -12,7 +12,7 @@
 	//retrieve the header
 	require('header.php');
 
-	if(isset($_SESSION['user']) && ($_SESSION['user_id'])) 
+	if(isset($_SESSION['user']))
 	{
 		//if the user session is not set (i.e. the user is not logged in) redirect to the login page
 		header('location:../view/user_account.php');
@@ -23,10 +23,235 @@
 		header('location:../view/memdata.php');
 	}    
 ?>
-  
+<script type="text/javascript" src="./ajax/jquery-1.2.6.min.js"></script>
+<script>
+    //display/hide registration div
+    
+                function A() {
+                        tint.style.display="block";
+                        box.style.display="block";
+
+                    }
+                     function B() {
+                        tint.style.display="none";
+                        box.style.display="none";
+
+                    }
+                    window.onkeydown = function (event)
+                    {
+                    if ( event.keyCode == 27 ) {
+                        console.log( 'escape pressed' );
+                        {
+                            alert('You have pressed ESC key');
+                            tint.style.display="none";
+                            box.style.display="none";
+                        }
+                    }
+                };
+    
+//             var cc_name = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+//             function checkemail() {
+//    //            var firstName = document.getElementById ("firstName");
+//                 var jerror = document.getElementsByClassName("jerror")[0];
+//                if (!cc_name.test(email.value)) {                
+//                    jerror.innerHTML="This email is not accepted!";
+//                    jerror.style.display="block";
+//                    document.getElementById("button").style.backgroundColor="gray";
+//                    document.getElementById("button").disabled = true;
+//                    return false;
+//                }
+//                 else {
+//                      jerror.innerHTML="Hello";
+//                     jerror.style.display="none";
+//                   document.getElementById("button").style.backgroundColor="";
+//                    document.getElementById("button").disabled = false;
+//                     return true;
+//                 } 
+//               
+//            }
+         
+    
+  // AJAX
+                    
+                pic1 = new Image(16, 16); 
+                pic1.src = "../view/ajax/loader.gif";
+
+                $(document).ready(function() {
+
+                $("#username").change(function() { 
+
+                var usr = $("#username").val();
+
+                if(usr.length >= 4)
+                {
+                $("#userstats").html('<img src="../view/ajax/loader.gif" align="absmiddle">&nbsp;Checking availability...');
+
+                    $.ajax({  
+                    type: "POST",  
+                    url: "../controller/checkdetails.php",  
+                    data: "username="+ usr,  
+                    success: function(msg){  
+
+                   $("#userstats").ajaxComplete(function(event, request, settings){ 
+
+                    if(msg == 'OK')
+                    { 
+                        $("#username").removeClass("object_error"); // if necessary
+                        $("#username").addClass("object_ok");
+                        $("#button").css("background-color", "darkblue").click(function() {return true; 
+//                                                                                           console.log("true");
+                                                                                          });
+                        $(this).html('&nbsp;<img src="../view/ajax/checkbox.png" align="absmiddle">');
+                    }  
+                    else  
+                    {  
+                        $("#username").removeClass("object_ok"); // if necessary
+                        $("#username").addClass("object_error");
+                        $("#button").css("background-color", "gray").click(function() {return false; 
+//                                                                                       console.log("false");
+                                                                                      });
+                        $(this).html(msg);
+                    }
+                   
+                   });
+
+                 } 
+
+                  }); 
+
+                }
+                else
+                    {
+                    $("#userstats").html('<font color="white" size="1px">The username should have at least <strong>4</strong> characters.</font>');
+                    $("#username").removeClass("object_ok"); // if necessary
+                    $("#username").addClass("object_error");
+                    $("#button").css("background-color", "gray").click(function() {return false;});    
+                    }
+                    
+                    //disable submit
+                   
+
+                });
+
+           });   
+    
+               
+            
+                    // EMAIL 
+//              
+            $(document).ready(function() {
+                $("#email").change(function() { 
+
+                var eml = $("#email").val();
+
+                if(eml.length >= 2)
+                {
+                $("#emailstats").html('<img src="../view/ajax/loader.gif" align="absmiddle">&nbsp;Checking availability...');
+
+                    $.ajax({  
+                    type: "POST",  
+                    url: "../controller/checkdetails.php",  
+                    data: "email="+ eml,  
+                    success: function(msg){  
+
+                   $("#emailstats").ajaxComplete(function(event, request, settings){ 
+
+                    if(msg == 'GOOD')
+                    { 
+                        $("#email").removeClass("object_error"); // if necessary
+                        $("#email").addClass("object_ok");
+                        $("#button").css("background-color", "darkblue").click(function() {return true; 
+//                                                                                           console.log("true");
+                                                                                          });
+                        $(this).html('&nbsp;<img src="../view/ajax/checkbox.png" align="absmiddle">');
+                    }  
+                    else  
+                    {  
+                        $("#email").removeClass("object_ok"); // if necessary
+                        $("#email").addClass("object_error");
+                        $("#button").css("background-color", "gray").click(function() {return false;
+//                                                                                       console.log("false");
+                                                                                      });
+                        $(this).html(msg);
+                    }
+                   
+                   });
+
+                 } 
+
+                  }); 
+
+                }
+                else
+                    {
+                    $("#emailstats").html('<font color="white" size="1px">This email is already taken.</font>');
+                    $("#email").removeClass("object_ok"); // if necessary
+                    $("#email").addClass("object_error");
+                    $("#button").css("background-color", "gray").click(function() {return false;});    
+                    }
+                    
+                    //disable submit
+                   
+
+                });
+
+               
+             });
+    
+    
+        //check each form
+
+
+     var cc_name = /^[A-Za-z]{3,15}$/;
+         function checklastname() {
+//            var firstName = document.getElementById ("firstName");
+             var jerror = document.getElementsByClassName("jerror")[0];
+            if (!cc_name.test(lastName.value)) {                
+                jerror.innerHTML="The field must not contain any numbers!";
+                jerror.style.display="block";
+                document.getElementById("button").style.backgroundColor="gray";
+                document.getElementById("button").disabled = true;
+                return false;
+            }
+             else {
+                 jerror.style.display="none";
+                document.getElementById("button").style.backgroundColor="";
+                document.getElementById("button").disabled = false;
+                 return true;
+             } 
+           
+        }
+    
+
+
+        
+//        var cc_name = /^[A-Za-z]{5,15}$/;
+      var cc_name = /^[A-Za-z]{3,15}$/;
+         function checkname() {
+//            var firstName = document.getElementById ("firstName");
+             var jerror = document.getElementsByClassName("jerror")[0];
+            if (!cc_name.test(firstName.value)) {                
+                jerror.innerHTML="The field must not contain any numbers!";
+                jerror.style.display="block";
+                document.getElementById("button").style.backgroundColor="gray";
+                document.getElementById("button").disabled = true;
+                return false;
+            }
+             else {
+                 jerror.style.display="none";
+                document.getElementById("button").style.backgroundColor="";
+                document.getElementById("button").disabled = false;
+                 return true;
+             } 
+           
+        }
+    
+        
+</script>
+
 <div id="tint"></div>
         
-  <div id="box" ><span id="exit" onclick="B()" onkeydown="return function (event)">&times</span>
+  <div id="box"><span id="exit" onclick="B()" onkeydown="return function (event)">&times</span>
    
       <?php
 		//user messages
@@ -38,15 +263,15 @@
 			unset($_SESSION['error']); //unset session error
 		}
 	?>
-      
-     <form action="../controller/registration_process.php" onsubmit="return(A());" name="form1" method="post" id="form2" target="_self">
+     <div class="jerror"></div> 
+     <form action="../controller/registration_process.php" name="form1" method="post" id="form2" target="_self">
             
-            <input type="text" name="firstName" id="firstName" required placeholder="  First name*" /><br />
-            <input type="text" name="lastName" id="lastName"  required placeholder="  Last name*" /><br />
-            <input type="email" name="email" id="email" placeholder="  Email address*" required /><br />
-            <input type="tel" name="phone" id="phone" required placeholder="  Phone number*" pattern=".{10,}" title="Include your area code. Numbers only." /><br />
-            <input type="text" name="street" id="street" required placeholder="  Street address*" /><br />
-            <input type="text" name="suburb" id="suburb" required placeholder="  Suburb*" /><br />
+            <input type="text" name="firstName" id="firstName" onblur="return checkname()" placeholder="  First name*" /><div class="smbreak"></div>
+            <input type="text" name="lastName" id="lastName" onblur="return checklastname()" placeholder="  Last name*" /><div class="smbreak"></div>
+         <input type="email" name="email" id="email" onblur="return checkemail()" placeholder="  Email address*" /><div id="emailstats"></div><div class="smbreak"></div>
+            <input type="tel" name="phone" id="phone" placeholder="  Phone number*" /><div class="smbreak"></div>
+            <input type="text" name="street" id="street"  placeholder="  Street address*" /><div class="smbreak"></div>
+            <input type="text" name="suburb" id="suburb"  placeholder="  Suburb*" /><div class="smbreak"></div>
             
         <select name="country" id="country">
                     <option value="Afganistan">Afghanistan</option>
@@ -296,13 +521,13 @@
                     <option value="Zaire">Zaire</option>
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
-                    </select><br />
+                    </select><div class="smbreak"></div>
 
-            <input type="text" name="postcode" id="postcode" required placeholder="  Postcode*" pattern=".{4,}" title="Minimum of 4 characters." /><br />
-            <input type="text" name="username" id="username" placeholder="  Username*" required /><br />
-            <input type="password" id="password" name="password" placeholder="  Password*" required pattern=".{8,}" title="Minimum of 8 characters."/><br />
+            <input type="text" name="postcode" id="postcode" placeholder="  Postcode*"/><div class="smbreak"></div>
+            <input type="text" name="username" id="username" placeholder="  Username*" required /><div id="userstats"></div><div class="smbreak"></div>
+            <input type="password" id="password" name="password" placeholder="  Password*" /><div class="smbreak"></div>
             
-            <input type="submit" name= "register" value="Register" id="button" onclick="C()"> 
+            <input type="submit" name="register" value="Register" id="button"> 
                     
         </form>
         </div>
@@ -322,7 +547,7 @@
        <form action="../controller/authentication_member.php" onsubmit="return(A());" method="post" >
             
             Username<br>
-            <input type="text" size="30" name="username_mem" /required > <br/>
+            <input type="text" size="25" name="username_mem" /required > <br/>
             Password<br>
             <input type="password" name="password_mem" size="30" maxlength="10" /required> <br/>
             

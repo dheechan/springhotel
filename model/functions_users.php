@@ -13,7 +13,30 @@
 		return $count;
 	}
 
-   
+   function get_member()
+	{
+		global $conn;
+		//query the database to select all data from the product table
+		$sql = "SELECT * FROM member WHERE memberusername = :username";		
+		//use a prepared statement to enhance security
+		$statement = $conn->prepare($sql);
+        $statement->bindValue(':username', $_SESSION['user']);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$statement->closeCursor();
+		return $result;
+	}
+
+   function get_username()
+	{
+		global $conn;
+		$sql = 'SELECT memberID FROM member WHERE memberusername = :username';
+		$statement = $conn->prepare($sql);
+		$statement->bindValue(':username', $username);
+		$result = $statement->fetchAll();
+		$statement->closeCursor();
+		return $result;
+	}
 
 	//create a function to add a new user
 	function add_member($firstName, $lastName, $street, $suburb, $country, $postcode, $email, $phone, $username, $password)
