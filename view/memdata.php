@@ -170,7 +170,7 @@
     <!--        <div class="spacediv_room"></div>     -->
             <h3>Room Capacity: Max <?php echo $row['roomcapacity']; ?> people </h3>
             <h3>Rate: $<?php echo $row['roomprice']; ?>/NIGHT </h3>
-            <h3 class="smbreak"><a href="../view/updateroom.php?roomID=<?php echo $row['roomID']; ?>" id="update_room" > || Update this Room | </a> <a href="#" id="update_room" >| Delete this Room ||</a> </h3>
+            <h3 class="smbreak"><a href="../view/updateroom.php?roomID=<?php echo $row['roomID']; ?>" id="update_room" > || Update this Room || </a> <a href="#" id="update_room" ></a> </h3>
                  <?php 
                  endforeach; 
                  ?>
